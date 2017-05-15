@@ -10,10 +10,6 @@ import java.util.ArrayList;
 class PermissionsUtils {
 
     static boolean requestPermission(Activity activity, int requestCode, String... permissions) {
-        return requestPermission(activity, requestCode, true, permissions);
-    }
-
-    private static boolean requestPermission(Activity activity, int requestCode, boolean request, String... permissions) {
         boolean granted = true;
         ArrayList<String> permissionsNeeded = new ArrayList<>();
 
@@ -29,18 +25,14 @@ class PermissionsUtils {
             }
         }
 
-        if (request) {
-            if (granted) {
-                return true;
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(activity,
-                        permissionsNeeded.toArray(new String[permissionsNeeded.size()]),
-                        requestCode);
-                return false;
-            }
+        if (granted) {
+            return true;
         } else {
-            return granted;
+            // No explanation needed, we can request the permission.
+            ActivityCompat.requestPermissions(activity,
+                    permissionsNeeded.toArray(new String[permissionsNeeded.size()]),
+                    requestCode);
+            return false;
         }
     }
 

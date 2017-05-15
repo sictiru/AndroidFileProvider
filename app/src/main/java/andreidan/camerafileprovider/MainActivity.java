@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Uri getUriFromFile(File cameraOutput) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             return FileProvider.getUriForFile(this, getPackageName() + ".provider", cameraOutput);
         } else {
             return Uri.fromFile(cameraOutput);
